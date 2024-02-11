@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  node:
+    container_name: node-website
+    user: "node"
+    working_dir: /home/node/app
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PLEX_SERVER_URL=
+      - PLEX_TOKEN=
+      - PORT=3000
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - plex_media
+
+networks:
+  plex_media:
+    external: true

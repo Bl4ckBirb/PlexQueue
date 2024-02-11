@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reudenboys Plex Movie Search</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <button class="mode-toggle" @click="toggleDarkMode">{{ darkMode ? 'Light Mode' : 'Dark Mode' }}</button>
+        <div class="search-container">
+            <input type="text" v-model="searchQuery" @input="searchMovies" placeholder="Search movies...">
+        </div>
+        <ul v-if="movies.length > 0" class="movies-list">
+            <li v-for="movie in movies" :key="movie.title">{{ movie.title }} ({{ movie.year }})</li>
+        </ul>
+        <div v-else class="no-results">No movies found.</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
