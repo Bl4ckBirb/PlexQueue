@@ -5,19 +5,23 @@
 }
 
 :root {
-    --background-color: #fff;
-    --text-color: #000;
-    --input-background-color: #f0f0f0;
-    --input-border-color: #ccc;
-    --item-background-color: #f0f0f0;
-}
-
-[data-theme="dark"] {
     --background-color: #333;
     --text-color: #fff;
+    --text-color-hover: #000;
     --input-background-color: #555;
     --input-border-color: #777;
     --item-background-color: #555;
+    --item-background-color-hover: #b4b4b4;
+}
+
+[data-theme="light"] {
+    --background-color: #fff;
+    --text-color: #000;
+    --text-color-hover: #fff;
+    --input-background-color: #f0f0f0;
+    --input-border-color: #ccc;
+    --item-background-color: #f0f0f0;
+    --item-background-color-hover: #7e7e7e;
 }
 
 body, html {
@@ -34,8 +38,9 @@ body, html {
 }
 
 .container {
-    width: 80%;
-    max-width: 600px; /* Adjust based on your preference */
+    margin: 20px;
+    width: 90%;
+    max-width: 900px; /* Adjust based on your preference */
     margin-top: calc(100vh / 4 - 50px); /* Adjust the search bar to be in the top 1/4 */
     text-align: center;
 }
@@ -68,6 +73,12 @@ body, html {
     border-radius: 4px;
 }
 
+.movies-list li:hover {
+    cursor: pointer;
+    background-color: var(--item-background-color-hover);
+    color: var(--text-color-hover);
+}
+
 .mode-toggle {
     position: fixed;
     top: 20px;
@@ -80,7 +91,81 @@ body, html {
     color: var(--text-color);
 }
 
+.mode-toggle:hover {
+    background-color: var(--item-background-color-hover);
+    color: var(--text-color-hover);
+}
+
 .no-results {
     color: #666;
 }
 
+.table {
+    width: 100%; /* Increase table width */
+    margin: 20px auto; /* Center the table */
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 20px; /* Increase padding to make rows taller */
+    text-align: left;
+}
+
+th {
+    background-color: var(--item-background-color);
+}
+
+.film-column {
+    width: 50%;
+}
+
+.von-column {
+    width: 20%;
+}
+
+.bewertung-column {
+    width: 30%;
+}
+
+.edit-button {
+    margin-left: 10px;
+    cursor: pointer;
+    white-space: nowrap; /* Prevents the button text from wrapping */
+    background-color: var(--item-background-color);
+    border: none;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    border-radius: 5px;
+}
+
+.edit-button:hover {
+    color: var(--text-color-hover);
+    background-color: var(--item-background-color-hover);
+}
+
+.cell-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.movie-title {
+    flex-grow: 1; /* Ensures the title takes up the available space, pushing the button to the right */
+}
+
+.search-overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 20px;
+}
+
+.search-container {
+    padding: 20px;
+}

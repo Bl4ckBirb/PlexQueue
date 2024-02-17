@@ -7,20 +7,45 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
     <div id="app" class="container">
-        <button class="mode-toggle" @click="toggleDarkMode">{{ darkMode ? 'Light Mode' : 'Dark Mode' }}</button>
-        <div class="search-container">
-            <input type="text" v-model="searchQuery" @input="searchMovies" placeholder="Search movies...">
+        <button class="mode-toggle" @click="toggleLightMode">{{ lightMode ? 'Dark Mode' : 'Light Mode' }}</button>
+        <div v-if="showSearch" class="search-overlay">
+            <div class="search-container">
+                <input type="text" v-model="searchQuery" @input="searchMovies" placeholder="Search movies...">
+                <ul v-if="movies.length > 0" class="movies-list">
+                    <li v-for="movie in movies" :key="movie.title" @click="selectMovie(movie)">{{ movie.title }} ({{ movie.year }})</li>
+                </ul>
+                <div v-else class="no-results">No movies found.</div>
+            </div>
         </div>
-        <ul v-if="movies.length > 0" class="movies-list">
-            <li v-for="movie in movies" :key="movie.title">{{ movie.title }} ({{ movie.year }})</li>
-        </ul>
-        <div v-else class="no-results">No movies found.</div>
+        <table v-else class="table">
+            <thead>
+                <tr>
+                    <th class="film-column">Film</th>
+                    <th class="von-column">Von</th>
+                    <th class="bewertung-column">Bewertung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(movie, index) in tableMovies" :key="index">
+                    <td>
+                        <div class="cell-content">
+                            <span class="movie-title">{{ movie.title }}</span>
+                            <button class="edit-button" @click="editMovie(index)">
+                                <i class="bi bi-wrench"></i>
+                            </button>
+                        </div>
+                    </td>                    
+                    <td> {{ movie.requester }} </td>
+                    <td> {{ movie.rating }} </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-

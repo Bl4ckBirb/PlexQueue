@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   node:
-    container_name: node-website
+    container_name: node-movie-website
     user: "node"
     working_dir: /home/node/app
     build: .
@@ -11,12 +11,18 @@ services:
       - PLEX_SERVER_URL=
       - PLEX_TOKEN=
       - PORT=3000
+      - DB_CONN_HOST=
+      - DB_CONN_PORT=
+      - DB_CONN_USER=
+      - DB_CONN_PASSWORD=
+      - DB_CONN_DATABASE=
     volumes:
       - .:/home/node/app
       - /home/node/app/node_modules
-    networks:
-      - plex_media
+    networks: # Optional - Add container to existing plex network if on same host.
+      - <plex_network_name>
 
+# Optional - see above
 networks:
-  plex_media:
+  <plex_network_name>:
     external: true
